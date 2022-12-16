@@ -1,0 +1,50 @@
+{
+  "name": "semantic-release-template",
+  "version": "0.0.0-development",
+  "description": "Based configured template with Semantic Relase",
+  "private": false,
+  "main": "index.js",
+  "scripts": {
+    "commit": "cz",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "semantic-release": "semantic-release"
+  },
+  "keywords": ["semantic"],
+  "author": "",
+  "license": "ISC",
+  "lint-staged": {
+    "*.{ts,tsx}": [
+      "git add"
+    ]
+  },
+  "devDependencies": {
+    "commitizen": "^4.2.6",
+    "cz-conventional-changelog": "^3.3.0",
+    "husky": "^8.0.2",
+    "lint-staged": "^13.1.0",
+    "semantic-release": "^19.0.5"
+  },
+  "release": {
+    "branches": [
+      "main"
+    ],
+    "plugins": [
+      [
+        "@semantic-release/npm",
+        {
+          "npmPublish": false
+        }
+      ],       
+      "@semantic-release/github"
+    ]
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/vladislavkovaliov/semantic-release-template.git"
+  }
+}
