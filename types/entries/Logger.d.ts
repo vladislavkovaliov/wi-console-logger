@@ -6,4 +6,7 @@ export declare class Logger implements ILogger {
     constructor(options?: {
         level?: ILogLevel;
     });
+    readonly _log: ILoggerFunction;
+    readonly _warn: ILoggerFunction;
+    readonly _error: ILoggerFunction;
 }
