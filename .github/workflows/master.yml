@@ -38,7 +38,14 @@ jobs:
   #     - run: npm run test:unit
 
   publish:
+    permissions:
+      contents: write
+      pull-requests: write
+      issues: write
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [20.x]
     if: ${{ github.ref == 'refs/heads/main' }}
     # needs: [test]
     steps:
@@ -51,6 +58,5 @@ jobs:
       - run: npm ci
       - run: npx semantic-release
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-
