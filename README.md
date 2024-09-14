@@ -15,7 +15,7 @@ import { Logger } from "wi-console-logger";
  * level = log - by default, shows all messages.
  */
 
-const logger = new Logger({ level: "warn" });
+const logger = new Logger({ level: "log" });
 
 logger.log("log");
 logger.warn("warn");
