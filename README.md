@@ -2,6 +2,8 @@
 
 Highlighting console native logging.
 
+Simple way to disable logging in production mode.
+
 ## Example
 
 ```tsx
