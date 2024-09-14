@@ -24,7 +24,7 @@
     "wi"
   ],
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "lint-staged": {
     "*.{ts,tsx}": [
       "git add"
