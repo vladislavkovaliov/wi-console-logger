@@ -34,7 +34,6 @@ export class Logger implements ILogger {
       `%c LOG `,
       "background: white; color: black;",
       message,
-      "",
       ...params,
     );
   };
@@ -44,7 +43,6 @@ export class Logger implements ILogger {
       `%c WARN `,
       "background: orange; color: black;",
       message,
-      "",
       ...params,
     );
   };
@@ -54,7 +52,6 @@ export class Logger implements ILogger {
       `%c ERROR `,
       "background: red; color: white;",
       message,
-      "",
       ...params,
     );
   };
