@@ -16,8 +16,12 @@ export class Logger implements ILogger {
 
   constructor(options?: { level?: ILogLevel; transform?: ITransform }) {
     const { level } = options || {};
-    const { transform } = options || {
-      colors: {
+    const { transform } = options || {};
+
+    if (transform !== undefined) {
+      this.colors = transform.colors;
+    } else {
+      this.colors = {
         log: {
           background: "white",
           font: "black",
@@ -30,10 +34,8 @@ export class Logger implements ILogger {
           background: "red",
           font: "white",
         },
-      },
-    };
-
-    this.colors = transform!.colors;
+      };
+    }
 
     this.error = this._error;
 
