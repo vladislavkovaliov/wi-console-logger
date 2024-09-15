@@ -1,13 +1,39 @@
 import { NO_OPTIONS } from "../constants";
-import { ILogger, ILoggerFunction, ILogLevel } from "../types";
+import {
+  IColorLog,
+  ILogger,
+  ILoggerFunction,
+  ILogLevel,
+  ITransform,
+} from "../types";
 
 export class Logger implements ILogger {
   readonly log: ILoggerFunction;
   readonly warn: ILoggerFunction;
   readonly error: ILoggerFunction;
 
-  constructor(options?: { level?: ILogLevel }) {
+  readonly colors: Record<ILogLevel, IColorLog>;
+
+  constructor(options?: { level?: ILogLevel; transform?: ITransform }) {
     const { level } = options || {};
+    const { transform } = options || {
+      colors: {
+        log: {
+          background: "white",
+          font: "black",
+        },
+        warn: {
+          background: "orange",
+          font: "black",
+        },
+        error: {
+          background: "red",
+          font: "white",
+        },
+      },
+    };
+
+    this.colors = transform!.colors;
 
     this.error = this._error;
 
@@ -30,29 +56,25 @@ export class Logger implements ILogger {
   }
 
   public readonly _log: ILoggerFunction = (message, ...params) => {
-    console.log(
-      `%c LOG `,
-      "background: white; color: black;",
-      message,
-      ...params,
-    );
+    console.log(`%c LOG `, this.getConsoleColor("log"), message, ...params);
   };
 
   public readonly _warn: ILoggerFunction = (message, ...params) => {
-    console.warn(
-      `%c WARN `,
-      "background: orange; color: black;",
-      message,
-      ...params,
-    );
+    console.warn(`%c WARN `, this.getConsoleColor("warn"), message, ...params);
   };
 
   public readonly _error: ILoggerFunction = (message, ...params) => {
     console.warn(
       `%c ERROR `,
-      "background: red; color: white;",
+      this.getConsoleColor("error"),
       message,
       ...params,
     );
+  };
+
+  private getConsoleColor = (level: ILogLevel): string => {
+    const { background, font } = this.colors[level];
+
+    return `background: ${background}; color: ${font}`;
   };
 }
